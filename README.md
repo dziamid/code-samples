@@ -4,8 +4,8 @@ A
 A simple component to integrate with react router
 
 Highlights:
-1) component prototyping with storybook
-2) focused snapshot testing with Jest
+1) component prototyping with [Storybook](https://github.com/storybooks/storybook)
+2) [focused](https://github.com/adriantoine/enzyme-to-json#focused-tests) snapshot testing with [Jest](https://github.com/facebook/jest)
 
 
 AddressAutocomplete
@@ -15,10 +15,10 @@ A wrapper component for Google Geocode API
 
 Highlights:
 
-1) strict typing with typescript
+1) strict interfaces with typescript
 2) usage of the thirdparty (Google API) typescript definitions for seamless integration
 3) integration with redux form is in a separate HOC component, so component can be used separately or inside a redux form
-4) use of redux-saga for handling side effects
+4) use of [redux-saga](https://github.com/redux-saga/redux-saga) for handling side effects
 
 Models
 -------------------
@@ -26,17 +26,17 @@ Models
 Integration with backend API.
 
 A collection of functions to query relational data, normalize data and store in redux store,
-a collection of selectors to query data from redux store (inspired by the Apollo framework)
+a collection of selectors to query data from redux store (inspired by the [Apollo framework](https://www.apollodata.com/))
 
 Highlights:
 
-1) normalized store
-2) works with reactive UI layer (based on Reselect library)
+1) store is [normalized](http://redux.js.org/docs/recipes/reducers/NormalizingStateShape.html#normalizing-state-shape)
+2) works with reactive UI layer (based on [Reselect](https://github.com/reactjs/reselect) library)
 
 Sockets
 -------------------
 
-Integration with Pusher for real-time traffic.
+Integration with [Pusher](https://pusher.com/) for real-time traffic.
 
 Highlights:
 
@@ -46,7 +46,7 @@ Highlights:
 .circleci
 -------------------
 
-Integration with Circle CI 2.0 for building, testing, and deployment
+Integration with [Circle CI](https://circleci.com/) 2.0 for building, testing, and deployment
 
 Highlights:
 
