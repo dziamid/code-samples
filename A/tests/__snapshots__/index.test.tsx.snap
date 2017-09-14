@@ -1,0 +1,17 @@
+exports[`<A /> should render correctly 1`] = `
+<A
+  disabled={false}
+  footer={false}
+  href="/link"
+  push={[Function]}>
+  <a
+    className="A-root-mock"
+    disabled={false}
+    href="/link"
+    onClick={[Function]}>
+    <h1>
+      Test
+    </h1>
+  </a>
+</A>
+`;

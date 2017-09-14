@@ -1,3 +1,12 @@
+A
+------------------
+
+A simple component to integrate with react router
+
+Hightlighs:
+1) component prototyping with storybook
+2) focused snatshot testing with jest
+
 
 AddressAutocomplete
 -------------------
@@ -9,6 +18,7 @@ Hightlighs:
 1) strict typing with typescript
 2) use of third party (google api) typescript definitions for seamless integration
 3) integration with redux form is in a seperate HOC component, so component can be used seperately or inside a redux form
+4) use of redux-saga for handling side effetcts
 
 Models
 -------------------
