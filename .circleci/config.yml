@@ -1,0 +1,56 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: dziamid/ubuntu-docker-compose
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Login
+          command: docker login -u $DOCKERHUB_USER -e $DOCKERHUB_EMAIL -p $DOCKERHUB_PASSWORD
+      - run:
+          name: Build
+          command: docker-compose -p noviopus -f bundle.yml build
+      - run:
+          name: Test
+          command: docker-compose -p noviopus -f bundle.yml run cypress
+      - run:
+          name: Collect artifacts
+          command: |
+            docker cp noviopus_cypress_run_1:/app/cypress/artifacts $(pwd)/cypress/artifacts
+          when: always
+      - store_test_results:
+          path: cypress/artifacts
+          when: always
+      - store_artifacts:
+          path: cypress/artifacts
+          when: always
+      # Deploy dev
+      - run:
+          name: Deploy dev
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
+              docker exec -it -e NODE_ENV=development noviopus_frontend_1 npm run build
+              docker cp noviopus_frontend_1:/app/build $(pwd)/cloud/build
+              cd cloud && docker build -t noviopus/frontend-dev .
+              docker push noviopus/frontend-dev
+            fi
+      - deploy:
+          name: Deploy staging
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
+              docker exec -it -e NODE_ENV=staging noviopus_frontend_1 npm run build
+              docker cp noviopus_frontend_1:/app/build $(pwd)/cloud/build
+              cd cloud && docker build -t noviopus/frontend-staging .
+              docker push noviopus/frontend-staging
+            fi
+      - deploy:
+          name: Deploy production
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker exec -it -e NODE_ENV=production noviopus_frontend_1 npm run build
+              docker cp noviopus_frontend_1:/app/build $(pwd)/cloud/build
+              cd cloud && docker build -t noviopus/frontend-prod .
+              docker push noviopus/frontend-prod
+            fi
